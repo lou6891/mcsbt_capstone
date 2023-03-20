@@ -1,6 +1,9 @@
 # Final Capstone project
 
-This repository contains the code for the final capstone project for the MCSBT
+This repository contains the code for the final capstone project for the MCSBT.
+This project aims to create a complete data visualization solution, which includes understanding the dataset, deploying 
+a database solution, integrating a back-end service, developing a front-end, and ensuring proper documentation and structure.
+
 The structure of this repo is as follows:
 - API
   - Contains the API created using flask_restx
@@ -27,4 +30,4 @@ The structure of this repo is as follows:
    - Evaluate the robustness of the solution and the level of creativity involved.
 
 
-> **ALl code documentation is present in specific README inside the API and Client**
+> **All code documentation is present in specific README inside the API and Client**

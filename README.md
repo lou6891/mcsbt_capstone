@@ -26,4 +26,5 @@ The structure of this repo is as follows:
 6. Solidness of the Solution and Creativity/Going Beyond: 
    - Evaluate the robustness of the solution and the level of creativity involved.
 
-> ALl code documentation is present in specific README inside the API and Client
+
+> **ALl code documentation is present in specific README inside the API and Client**

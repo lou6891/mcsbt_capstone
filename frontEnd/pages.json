@@ -1,0 +1,26 @@
+{
+    "144a38356e5a61fa29fabd012051f99b": {
+        "page_script_hash": "144a38356e5a61fa29fabd012051f99b",
+        "page_name": "Home",
+        "icon": "",
+        "script_path": "C:\\Users\\lucac\\OneDrive\\Desktop\\MSCBT\\CodingLanguages\\PycharmProjects\\pythonProject\\Capstone\\final_deliverable\\frontEnd\\1_Home.py"
+    },
+    "96ee38cb81f20b23bae6c973dd740f3f": {
+        "page_script_hash": "96ee38cb81f20b23bae6c973dd740f3f",
+        "page_name": "Articles",
+        "icon": "",
+        "script_path": "C:\\Users\\lucac\\OneDrive\\Desktop\\MSCBT\\CodingLanguages\\PycharmProjects\\pythonProject\\Capstone\\final_deliverable\\frontEnd\\pages\\2 Articles.py"
+    },
+    "60d30e337ff70b8b915f7d5d29f8cd07": {
+        "page_script_hash": "60d30e337ff70b8b915f7d5d29f8cd07",
+        "page_name": "Customers",
+        "icon": "",
+        "script_path": "C:\\Users\\lucac\\OneDrive\\Desktop\\MSCBT\\CodingLanguages\\PycharmProjects\\pythonProject\\Capstone\\final_deliverable\\frontEnd\\pages\\3 Customers.py"
+    },
+    "759c593003088cf85ffb00c305a14acc": {
+        "page_script_hash": "759c593003088cf85ffb00c305a14acc",
+        "page_name": "Transactions",
+        "icon": "",
+        "script_path": "C:\\Users\\lucac\\OneDrive\\Desktop\\MSCBT\\CodingLanguages\\PycharmProjects\\pythonProject\\Capstone\\final_deliverable\\frontEnd\\pages\\4 Transactions.py"
+    }
+}

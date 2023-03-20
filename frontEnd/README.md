@@ -21,6 +21,16 @@ The H&M Analytics Dashboard provides the following features:
 4. View the **KPIs** and **charts** displayed on the pages to understand trends and patterns in the data.
 5. Log out when you're finished.
 
+## Page Structure:
+1. Home page
+   Initially LogIn and registartion page, then Home pge and LogOut page
+2. Articles
+   Page dedicated to the analysis of the H&M Articles
+3. Customers
+   Page dedicated to the analysis of the H&M Customers
+4. Transactions
+   Page dedicated to the analysis of the H&M Transactions
+
 ## Technologies
 
 - Python

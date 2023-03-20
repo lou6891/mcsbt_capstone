@@ -4,18 +4,9 @@ import hashlib
 from dotenv import load_dotenv
 import os
 import datetime
-import extra_streamlit_components as stx
 from utils.PageManagementModule import *
 from streamlit_extras.switch_page_button import switch_page
-
 import streamlit as st
-import streamlit_authenticator as stauth
-
-
-
-#@st.cache(allow_output_mutation=True, suppress_st_warning=True)
-#def get_manager():
-#    return stx.CookieManager(key="test_2")
 
 
 def login_tabs(cookie_manager_2):
@@ -53,7 +44,6 @@ def login_tabs(cookie_manager_2):
 
                 # Set a cookie if the "Remember me" option is checked
                 if remember_me:
-
                     expires_at = datetime.datetime.now() + datetime.timedelta(days=30)
                     cookie_manager_2.set("3", "3", expires_at=expires_at, key="abc")
 
@@ -112,14 +102,12 @@ def logout_tab(cookie_manager_2):
 
 
 def show_login_page(cookie_manager_2):
-
-
     login_tabs(cookie_manager_2)
     if cookie_manager_2.get("AuthoriazationCookie"):
-
         # Then go to the Home page
         show_all_pages()
         switch_page(SECOND_PAGE_NAME)
+
 
 '''
     if 'loggedIn' not in st.session_state:

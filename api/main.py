@@ -1,8 +1,8 @@
 # Import required packages
 from mongoDB_call import get_collection, login
 from mongoDB_post import register
-from flask import Flask, jsonify, request, make_response
-from flask_restx import Api, Namespace, Resource, reqparse, inputs, fields
+from flask import Flask, jsonify, make_response
+from flask_restx import Api, Namespace, Resource, reqparse
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity, create_refresh_token
 import datetime
 from mongoDb_load_data import collections_verifies_uploader

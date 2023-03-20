@@ -14,9 +14,8 @@ import os
 import datetime
 import extra_streamlit_components as stx
 from utils.PageManagementModule import *
-from streamlit_extras.switch_page_button import switch_page
 
-######### COOKIES COOKIES COOKIES #########
+# ####### COOKIES COOKIES COOKIES ####### #
 
 # Initialize the cookie manager
 cookie_manager = stx.CookieManager()

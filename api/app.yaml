@@ -1,5 +1,5 @@
 runtime: python
-service : server
+service : api
 env: flex
 
 entrypoint: gunicorn -b :$PORT main:app

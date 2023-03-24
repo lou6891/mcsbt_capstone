@@ -1,5 +1,5 @@
 runtime: python
-service : server
+service : client
 env: flex
 
 entrypoint : streamlit run 1_Home.py --server.port $PORT

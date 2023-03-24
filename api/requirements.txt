@@ -1,6 +1,9 @@
-pymongo==4.3.3
-python-dotenv==1.0.0
-pandas==1.5.3
-Flask==2.2.3
-flask-restx==1.1.0
-Flask-jwt-extended==4.4.4
+python-dotenv
+pandas
+SQLAlchemy==1.4.40
+Flask
+gunicorn==20.1.0
+flask-restx
+flask_jwt_extended
+pymysql
+pymongo[tls, srv]

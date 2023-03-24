@@ -5,3 +5,4 @@ extra-streamlit-components==0.1.56
 streamlit-extras==0.2.6
 pandas==1.5.3
 altair==4.2.2
+gunicorn==20.1.0

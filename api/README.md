@@ -13,14 +13,7 @@ This REST API is designed to provide access to the following resources:
 
 It includes operations for fetching, creating, and managing these resources. The API uses JSON Web Tokens (JWT) for authentication and authorization.
 
-## Necessary Action to use this API
-Create .env file with :
-MONGODB_URI=mongodb+srv://{0}:{1}@{2}/?retryWrites=true&w=majority
-USER=<your_username>
-PASSW=<your_password>
-HOST=<your host>
-DATABASE=<your database>
-COLLECTIONS_LIST=articles,transactions,customers
+
 
 ## Required Modules
 

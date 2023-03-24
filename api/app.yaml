@@ -9,3 +9,11 @@ runtime_config:
 
 manual_scaling:
   instances: 1
+
+env_variables:
+  MONGODB_URI: "mongodb+srv://{0}:{1}@{2}/?retryWrites=true&w=majority"
+  DB_USER: "luca"
+  PASSW: "capstone"
+  HOST: "charmender.1afwfzf.mongodb.net"
+  DATABASE: "management"
+  COLLECTIONS_LIST: "articles,transactions,customers"

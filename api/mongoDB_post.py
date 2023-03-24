@@ -12,7 +12,7 @@ def register(username, password):
 
         # Create a MongoDB client using environment variables
         client = pymongo.MongoClient(
-            os.getenv("MONGODB_URI").format(os.getenv("USER"), os.getenv("PASSW"), os.getenv("HOST")))
+            os.getenv("MONGODB_URI").format(os.getenv("DB_USER"), os.getenv("PASSW"), os.getenv("HOST")))
 
         # Connect to the specified database
         db = client[os.getenv("DATABASE")]

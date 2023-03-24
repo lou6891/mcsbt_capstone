@@ -13,7 +13,7 @@ def open_connection_to_db():
 
         # Create a MongoDB client using environment variables
         client = pymongo.MongoClient(
-            os.getenv("MONGODB_URI").format(os.getenv("USER"), os.getenv("PASSW"), os.getenv("HOST")))
+            os.getenv("MONGODB_URI").format(os.getenv("DB_USER"), os.getenv("PASSW"), os.getenv("HOST")))
 
         # Return a reference to the specified database
         return client[os.getenv("DATABASE")]

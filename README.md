@@ -29,5 +29,67 @@ The structure of this repo is as follows:
 6. Solidness of the Solution and Creativity/Going Beyond: 
    - Evaluate the robustness of the solution and the level of creativity involved.
 
+## Local testing / deploying with .env
+To test local or deploy using .env for environmental variables it's necessary to set the following:
 
-> **All code documentation is present in specific README inside the API and Client**
+1. In the **api** folder create a .env file containing the following:<br>
+   - MONGODB_URI=mongodb+srv://{0}:{1}@{2}/?retryWrites=true&w=majority 
+   - DB_USER=<your_username>
+   - PASSW=<your_password>
+   - HOST=<your_host>
+   - DATABASE=<your_database>
+   - COLLECTIONS_LIST=articles,transactions,customers
+
+2. In the **client** folder create a .env file containing the following:<br>
+   - BASE_API_URL=<your_api_url> <br> EX: http://127.0.0.1:5000
+
+## Deploy on Google App Engine
+To deploy on google app engine it's necessary to create app.yalm files with the settings and environmental variables
+
+> The .env do not work on app engines
+
+1. In the **api** folder create a file called app.yaml with the following:
+    ```
+    runtime: python
+    service : <your_service_name>
+    env: flex
+    
+    entrypoint: gunicorn -b :$PORT main:app
+    
+    runtime_config:
+        python_version: 3
+    
+    manual_scaling:
+      instances: 1
+    
+    env_variables:
+        MONGODB_URI: "mongodb+srv://{0}:{1}@{2}/?retryWrites=true&w=majority"
+        DB_USER: "<your_username>"
+        PASSW: "<your_password>"
+        HOST: "<your_host>"
+        DATABASE: "<your_database>"
+        COLLECTIONS_LIST: "articles,transactions,customers"
+    ```
+
+2. In the **client** folder create a file called app.yaml with the following:
+    ```
+   runtime: python
+    service : <your_service_name>
+    env: flex
+    
+    entrypoint : streamlit run 1_Home.py --server.port $PORT
+    
+    runtime_config:
+        python_version: 3.7
+    
+    manual_scaling:
+      instances: 1
+    
+    env_variables:
+      BASE_API_URL: "<your_api_url>"
+    ```
+
+
+
+
+> **More detailed information for each component is present in relative README file inside the API and Client**

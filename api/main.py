@@ -168,7 +168,7 @@ class GetUser(Resource):
              API endpoint in charge of login, it checks if the user is present in the DB,
              If positive it return the access and refresh token needed for login
              ''')
-    def get(self):
+    def post(self):
         args = auth_parser.parse_args()
         username = args['username']
         password = args['password']

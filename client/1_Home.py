@@ -47,7 +47,8 @@ def login_tabs(cookie_manager):
 
                 # Send the username and hashed password to the API
                 url = os.getenv("BASE_API_URL") + "/api/v1/users/login/"
-                response = requests.get(url, json={"username": username, "password": hashed_password})
+                response = requests.post(url, json={"username": username, "password": hashed_password})
+
 
                 # Check if the API response is true
                 if response.ok:

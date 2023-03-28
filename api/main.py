@@ -5,6 +5,8 @@ from flask import Flask, jsonify, make_response, request
 from flask_restx import Api, Namespace, Resource, reqparse
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity, create_refresh_token
 import datetime
+import re
+import hashlib
 from mongoDb_load_data import collections_verifies_uploader
 
 # Uncomment the following line if you want to verify and upload collections to the database
@@ -51,6 +53,15 @@ auth_parser.add_argument('password', type=str, help='password')
 # Set up a request parser for the limit argument
 limit_parser = reqparse.RequestParser()
 limit_parser.add_argument('limit', type=int, default=1000)
+
+
+def is_sha256_hash(s):
+    """Checks if the given string is a SHA256 hash
+    This function is used so that if the user is using the swagger UI,
+    the api will hash the password in login and registration to keep the database consistent
+    """
+    return bool(re.match(r'^[a-f0-9]{64}$', s))
+
 
 ########################################################################################################################
 # #################                                    ARTICLES                                      ################# #
@@ -173,6 +184,10 @@ class GetUser(Resource):
         username = args['username']
         password = args['password']
 
+        # Check if password is hashed (i.e.: coming from client), if not hash it to keep db consistency
+        if not is_sha256_hash(password):
+            password = hashlib.sha256(password.encode()).hexdigest()
+
         db_call = login(username, password)
 
         if db_call:
@@ -203,6 +218,10 @@ class CreateUser(Resource):
         args = auth_parser.parse_args()
         username = args['username']
         password = args['password']
+
+        # Check if password is hashed (i.e.: coming from client), if not hash it to keep db consistency
+        if not is_sha256_hash(password):
+            password = hashlib.sha256(password.encode()).hexdigest()
 
         db_call = register(username, password)
 

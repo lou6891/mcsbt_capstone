@@ -131,4 +131,3 @@ In case of errors, the API will return a JSON object containing an error message
 ## Authentication and Authorization
 
 The API uses JWT for authentication and authorization. Users must log in or register to obtain a valid access token, which must be included in the Authorization header of requests to protected endpoints. Access tokens have a limited lifetime, and users can refresh them using their refresh token at the /api/v1/users/refresh endpoint.
-

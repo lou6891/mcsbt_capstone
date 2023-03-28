@@ -14,7 +14,6 @@ import extra_streamlit_components as stx
 from utils.PageManagementModule import *
 from streamlit_extras.app_logo import add_logo
 
-
 # ####### COOKIES COOKIES COOKIES ####### #
 
 # Initialize the cookie manager
@@ -22,8 +21,6 @@ cookie_manager = stx.CookieManager()
 
 # set logo
 add_logo("./img/logo.png", height=200)
-
-
 
 
 # Define the login and registration tabs

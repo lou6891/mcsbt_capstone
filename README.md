@@ -14,6 +14,11 @@ The structure of this repo is as follows:
 - Data
   - The data uploaded to MongoDb they are not used by the API or Client, they have documentation purposes.
 
+> [API Demo](https://capstone-381610.ew.r.appspot.com/) \
+> [Client Demo](https://client-dot-capstone-381610.ew.r.appspot.com/) \
+> Demos might not be available after the 31/04/2023
+> Use user: admin and pass: admin to test both /login endpoint in API and login in client, or create new user
+
 ## Assigment Requirements
 
 1. Understanding of the Data Set: 
@@ -88,8 +93,5 @@ To deploy on google app engine it's necessary to create app.yalm files with the 
     env_variables:
       BASE_API_URL: "<your_api_url>"
     ```
-
-
-
 
 > **More detailed information for each component is present in relative README file inside the API and Client**

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import pandas as pd
 from utils.verify_api_token import verify_api_token
 import altair as alt
-from streamlit_extras.app_logo import add_logo
+from utils.add_logo import add_logo
 
 
 load_dotenv()
@@ -18,7 +18,7 @@ except Exception as error:
     pass;
 
 # set logo
-add_logo("./img/logo_small.png", height=200)
+add_logo(300, 170)
 
 cookie_manager = stx.CookieManager(key="Transactions_page")
 

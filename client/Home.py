@@ -12,7 +12,7 @@ import os
 import datetime
 import extra_streamlit_components as stx
 from utils.PageManagementModule import *
-from streamlit_extras.app_logo import add_logo
+from utils.add_logo import add_logo
 
 # ####### COOKIES COOKIES COOKIES ####### #
 
@@ -20,7 +20,7 @@ from streamlit_extras.app_logo import add_logo
 cookie_manager = stx.CookieManager()
 
 # set logo
-add_logo("./img/logo.png", height=200)
+add_logo(300, 170)
 
 
 # Define the login and registration tabs
@@ -49,7 +49,6 @@ def login_tabs(cookie_manager):
                 # Send the username and hashed password to the API
                 url = os.getenv("BASE_API_URL") + "/api/v1/users/login/"
                 response = requests.post(url, json={"username": username, "password": hashed_password})
-
 
                 # Check if the API response is true
                 if response.ok:
@@ -137,6 +136,7 @@ def login_tabs(cookie_manager):
             else:
                 st.error("Username not valid")
 
+
 try:
     # Check if there's no authorization cookie and the user is not logged in
     if not cookie_manager.get("AuthorizationCookie"):
@@ -210,4 +210,3 @@ try:
 
 except Exception as error:
     print(error)
-

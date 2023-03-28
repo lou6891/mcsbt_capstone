@@ -38,3 +38,6 @@ coverage.xml
 # Client files
 /client/pages.json
 /client/app.yaml
+
+# Other img
+deploy_gCloud.png

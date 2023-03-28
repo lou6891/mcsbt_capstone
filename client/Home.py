@@ -14,7 +14,12 @@ import extra_streamlit_components as stx
 from utils.PageManagementModule import *
 from utils.add_logo import add_logo
 
-# ####### COOKIES COOKIES COOKIES ####### #
+try:
+    # Config page title and icon
+    st.set_page_config(page_title="H&M Analytics", page_icon=":bar_chart:")
+except Exception as error:
+    pass;
+
 
 # Initialize the cookie manager
 cookie_manager = stx.CookieManager()

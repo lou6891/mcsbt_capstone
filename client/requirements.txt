@@ -1,7 +1,6 @@
 pip==21.3.1
 streamlit==1.20.0
 requests
-hashlib
 python-dotenv
 extra-streamlit-components
 streamlit-extras

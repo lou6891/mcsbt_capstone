@@ -12,14 +12,18 @@ import os
 import datetime
 import extra_streamlit_components as stx
 from utils.PageManagementModule import *
+from streamlit_extras.app_logo import add_logo
+
 
 # ####### COOKIES COOKIES COOKIES ####### #
 
 # Initialize the cookie manager
 cookie_manager = stx.CookieManager()
 
-# Set the title of the web app
-st.title("Home Page")
+# set logo
+add_logo("./img/logo.png", height=200)
+
+
 
 
 # Define the login and registration tabs
@@ -136,67 +140,77 @@ def login_tabs(cookie_manager):
             else:
                 st.error("Username not valid")
 
+try:
+    # Check if there's no authorization cookie and the user is not logged in
+    if not cookie_manager.get("AuthorizationCookie"):
+        # Set the title of the web app
+        st.title("Authorization Page")
 
-# Check if there's no authorization cookie and the user is not logged in
-if not cookie_manager.get("AuthorizationCookie"):
-    if "LogIn" not in st.session_state:
-        # Clear all pages except the first page (login/registration)
-        clear_all_but_first_page()
-        # Display the login and registration tabs
-        login_tabs(cookie_manager)
-
-# If the user has an authorization cookie
-if cookie_manager.get("AuthorizationCookie"):
-    # Show all pages in the app
-    show_all_pages()
-
-    # Create Home and Log Out tabs
-    Home, LogOut = st.tabs(["Home", "Log Out"])
-
-    # Content for the Home tab
-    with Home:
-        st.markdown('''
-                    # Welcome to the H&M Analytics Dashboard!
-
-                    Are you ready to explore H&M's articles, customers, and transactions? 
-                    Look no further than this Streamlit app! 
-
-                    ## Uncover Insights with Ease
-
-                    With this tool, you can easily dive into each database's **unique page** and explore **various 
-                    filters** and **KPIs**. Gain insights into H&M's performance, understand customer behavior, 
-                    analyze product trends, and track transactional data, all with just a few clicks.
-
-                    It provides an **easy-to-use interface** that allows you to filter through the data and view 
-                    it in a **visually appealing** and **informative** way. 
-                    You'll find charts, graphs, and tables that provide you with a comprehensive overview of each 
-                    database.
-
-                    ## Empowering Data-Driven Decisions
-
-                    This dashboard is designed to help you uncover valuable insights that can help H&M make 
-                    **data-driven decisions** for the future. By leveraging the power of data, you can stay ahead of 
-                    the competition and drive success for your business.
-
-                    Thank you for using this app, and we hope you find it useful!
-                    Made by Luca Conti
-                    ''')
-
-    # Content for the Log-Out tab
-    with LogOut:
-        st.subheader("Thanks for stopping by! It's been great having you here! ")
-        # Button to trigger the logout process
-        if st.button("LogOut", use_container_width=True):
-            # If the user is logged in
-            if "LogIn" in st.session_state:
-                # Remove the login state
-                del st.session_state["LogIn"]
-
-            # Delete the authorization, refresh, and API tokens from the cookies
-            cookie_manager.delete("AuthorizationCookie", key="DeleteAuthorizationCookie")
-            cookie_manager.delete("refreshToken", key="DeleteRefreshToken")
-            cookie_manager.delete("ApiToken", key="DeleteApiToken")
-
+        if "LogIn" not in st.session_state:
             # Clear all pages except the first page (login/registration)
             clear_all_but_first_page()
+            # Display the login and registration tabs
+            login_tabs(cookie_manager)
+
+    # If the user has an authorization cookie
+    if cookie_manager.get("AuthorizationCookie"):
+
+        # Set the title of the web app
+        st.title("Home Page")
+
+        # Show all pages in the app
+        show_all_pages()
+
+        # Create Home and Log Out tabs
+        Home, LogOut = st.tabs(["Home", "Log Out"])
+
+        # Content for the Home tab
+        with Home:
+            st.markdown('''
+                        # Welcome to the H&M Analytics Dashboard!
+    
+                        Are you ready to explore H&M's articles, customers, and transactions? 
+                        Look no further than this Streamlit app! 
+    
+                        ## Uncover Insights with Ease
+    
+                        With this tool, you can easily dive into each database's **unique page** and explore **various 
+                        filters** and **KPIs**. Gain insights into H&M's performance, understand customer behavior, 
+                        analyze product trends, and track transactional data, all with just a few clicks.
+    
+                        It provides an **easy-to-use interface** that allows you to filter through the data and view 
+                        it in a **visually appealing** and **informative** way. 
+                        You'll find charts, graphs, and tables that provide you with a comprehensive overview of each 
+                        database.
+    
+                        ## Empowering Data-Driven Decisions
+    
+                        This dashboard is designed to help you uncover valuable insights that can help H&M make 
+                        **data-driven decisions** for the future. By leveraging the power of data, you can stay ahead of 
+                        the competition and drive success for your business.
+    
+                        Thank you for using this app, and we hope you find it useful!
+                        Made by Luca Conti
+                        ''')
+
+        # Content for the Log-Out tab
+        with LogOut:
+            st.subheader("Thanks for stopping by! It's been great having you here! ")
+            # Button to trigger the logout process
+            if st.button("LogOut", use_container_width=True):
+                # If the user is logged in
+                if "LogIn" in st.session_state:
+                    # Remove the login state
+                    del st.session_state["LogIn"]
+
+                # Delete the authorization, refresh, and API tokens from the cookies
+                cookie_manager.delete("AuthorizationCookie", key="DeleteAuthorizationCookie")
+                cookie_manager.delete("refreshToken", key="DeleteRefreshToken")
+                cookie_manager.delete("ApiToken", key="DeleteApiToken")
+
+                # Clear all pages except the first page (login/registration)
+                clear_all_but_first_page()
+
+except Exception as error:
+    print(error)
 

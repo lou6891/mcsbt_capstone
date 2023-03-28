@@ -7,7 +7,7 @@ from streamlit.source_util import _on_pages_changed, get_pages
 import json
 from pathlib import Path
 
-DEFAULT_PAGE = "1_Home.py"
+DEFAULT_PAGE = "Home.py"
 
 
 def get_all_pages():

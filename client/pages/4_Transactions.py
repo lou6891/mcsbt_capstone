@@ -6,10 +6,22 @@ from dotenv import load_dotenv
 import pandas as pd
 from utils.verify_api_token import verify_api_token
 import altair as alt
+from streamlit_extras.app_logo import add_logo
+
 
 load_dotenv()
 df = None
+try:
+    # Config page title and icon
+    st.set_page_config(page_title="H&M Analytics", page_icon=":bar_chart:")
+except Exception as error:
+    pass;
+
+# set logo
+add_logo("./img/logo_small.png", height=200)
+
 cookie_manager = stx.CookieManager(key="Transactions_page")
+
 st.title("Transactions Dashboard")
 
 
@@ -21,6 +33,8 @@ def api_call_transactions(token):
 
 
 # API Call, first verify that the token is valid, if not get a new one, if not re login
+# Not created a universal function cause I want to cache the data of each page
+
 with st.spinner('Verifying token ...'):
     token = verify_api_token()
     if token:
@@ -32,7 +46,7 @@ with st.spinner('Verifying token ...'):
         else:
             st.write(response)
     else:
-        st.write("errror token validity")
+        st.write("Refreshing Token")
 
 if df is not None:
 
@@ -58,12 +72,11 @@ if df is not None:
     max_price = float(price_lst.max())
 
     price_filtered_lst = st.sidebar.slider(
-        'Select a range of ages',
+        'Select a price range',
         0.0, max_price, (min_price, max_price), format="%f", )
 
     st.sidebar.write('Price range selected:')
     st.sidebar.write(price_filtered_lst)
-
 
     # DATE range filter
     df["t_dat"] = pd.to_datetime(df['t_dat'])
@@ -105,52 +118,75 @@ if df is not None:
     kpi1, kpi2, kpi3 = st.columns(3)
 
     kp1_value = filtered_df2["customer_id"].unique()
+    delta_kp1 = len(kp1_value) - len(df["customer_id"].unique())
     kpi1.metric(
         label="Number of different customers",
         value=len(kp1_value),
-        delta=len(kp1_value),
+        delta=delta_kp1,
     )
 
     kp2_value = filtered_df2["sales_channel_id"].unique()
+    delta_kp2 = len(kp2_value) - len(df["sales_channel_id"].unique())
     kpi2.metric(
         label="Number of different sales channels",
         value=len(kp2_value),
-        delta=len(kp2_value),
+        delta=delta_kp2,
     )
 
     kp3_value = filtered_df2["price"].mean()
+    delta_kp3 = round(kp3_value, 2) - round(df["price"].mean(), 2)
     kpi3.metric(
         label="Average price",
         value=round(kp3_value, 2),
-        delta=-10 + kp3_value,
+        delta=round(delta_kp3, 2),
     )
 
     kpi4, kpi5 = st.columns(2)
-    date_lst = filtered_df2["t_dat"]
-    dates_list = filtered_df2["t_dat"]
-    kp4_value = (max(dates_list) - min(dates_list)).days
+
+    if len(filtered_df2["t_dat"]) > 0:
+        kp4_value = (max(filtered_df2["t_dat"]) - min(filtered_df2["t_dat"])).days
+        old_value = (max(df["t_dat"]) - min(df["t_dat"])).days
+    else:
+        kp4_value = 0
+        old_value = 0
+    delta_kp4 = old_value - kp4_value
     kpi4.metric(
         label="Number of days for the date range selected",
         value=kp4_value,
-        delta=kp4_value,
+        delta=delta_kp4,
     )
 
-    kp5_value = int(filtered_df2['customer_id'].value_counts().max())
+    if filtered_df2['customer_id'].notnull().any():
+        kp5_value = int(filtered_df2['customer_id'].value_counts().max())
+    else:
+        kp5_value = 0
+    old_value = int(df['customer_id'].value_counts().max())
+    delta_kp5 = kp5_value - old_value
     kpi5.metric(
         label="Highest number of transactions by a unique client",
         value=kp5_value,
-        delta=kp5_value,
+        delta=delta_kp5,
     )
 
     # calculate count of unique transaction IDs and get top 10
     histdf = pd.DataFrame(pd.Series(df['customer_id'].value_counts()).nlargest(25))
+
     # Create a new column with index values
-    histdf['index'] = histdf.index
+    # Reset the index and rename the columns
+    histdf.reset_index(inplace=True)
+    histdf.columns = ['customer_id', 'count']
+
+    # Create a new column 'row_number' containing the row numbers
+    histdf['row_number'] = range(len(histdf))
+
+    # Create a new column 'color' with alternating values of 'red' and 'lightsalmon'
+    histdf['color'] = histdf['row_number'].apply(lambda x: 'red' if x % 2 == 0 else 'lightsalmon')
 
     # create an Altair chart
     chart = alt.Chart(histdf).mark_bar(size=15).encode(
-        x='customer_id',
-        y='index'
+        x='count:Q',
+        y=alt.Y('customer_id:N', sort='-x'),
+        color=alt.Color('color:N', scale=None, legend=None)
     )
 
     # display the chart in Streamlit

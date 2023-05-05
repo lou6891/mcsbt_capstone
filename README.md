@@ -14,8 +14,8 @@ The structure of this repo is as follows:
 - Data
   - The data uploaded to MongoDb they are not used by the API or Client, they have documentation purposes.
 
-> [API Demo](https://capstone-381610.ew.r.appspot.com/) \
-> [Client Demo](https://client-dot-capstone-381610.ew.r.appspot.com/) \
+> [API Demo](http://34.27.214.52:3001/) \
+> [Client Demo](http://34.27.214.52:8501/) \
 > Demos might not be available after the 31/04/2023
 > Use user: admin and pass: admin to test both /login endpoint in API and login in client, or create new user
 
